@@ -74,13 +74,11 @@ public class UserInterfaceApp {
         });
 
         item2.addActionListener(e -> {
-            try {
-                java.io.FileWriter writer = new java.io.FileWriter("log.txt", true);
+            try (java.io.FileWriter writer = new java.io.FileWriter("log.txt", true)) {
                 writer.write(textArea.getText());
-                writer.close();
 
                 textArea.append("Content saved to log.txt\n");
-            } catch (Exception ex) {
+            } catch (java.io.IOException ex) {
                 textArea.append("Error saving file\n");
             }
         });
